@@ -3,26 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Appointment</title>
+    <title>Appointments</title>
 </head>
 <body>
-    <h1>Book an Appointment</h1>
-    <form action="AppointmentServlet" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br><br>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
-
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date" required><br><br>
-
-        <label for="time">Time:</label>
-        <input type="time" id="time" name="time" required><br><br>
-
-        <input type="submit" value="Book Appointment">
-    </form>
+    <h1>Appointments</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%
+                ResultSet appointments = (ResultSet) request.getAttribute("appointments");
+                while (appointments.next()) {
+            %>
+            <tr>
+                <td><%= appointments.getString("name") %></td>
+                <td><%= appointments.getString("email") %></td>
+                <td><%= appointments.getString("date") %></td>
+                <td><%= appointments.getString("time") %></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
     <br>
-    <a href="appointments">View All Appointments</a>
+    <a href="index.jsp">Book Another Appointment</a>
 </body>
 </html>
